@@ -9,8 +9,8 @@ const db = new sqlite3.Database('../databasedb.sqlite3')
 //advertise a new project
 
 router.post('/api/v1/projects', (req, res) => {
-  const {title,description,requirements} = req.body;
-  const faculty_id = req.user.userId;
+  const {} = req.body;
+  
 
   db.run('insert into projects (title,description,requirements,faculty_id) values (?,?,?,?)',
 [title,description,requirements,faculty_id], function(err){
@@ -33,6 +33,7 @@ router.get('/projects', (req, res) => {
     res.json(rows);
   });
 });
+
 
 
 
