@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sopapp/screens/admin/admindash.dart';
+import 'package:sopapp/screens/admin/admin_dash.dart';
 
 class SignInScreen extends StatefulWidget {
   @override

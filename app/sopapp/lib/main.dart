@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sopapp/screens/admin/admindash.dart';
 import 'package:sopapp/screens/signin.dart';
-import 'package:sopapp/screens/student/studentdash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+// import 'package:sopapp/screens/admin/admin_dash.dart';
+// import 'package:sopapp/screens/faculty/faculty_dash.dart';
+// import 'package:sopapp/screens/login.dart';
+// import 'package:sopapp/screens/student/student_dash.dart';
 
 void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -18,11 +20,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+
       home: SignInScreen(),
+      theme: ThemeData.dark(),
+     
     );
   }
 }
