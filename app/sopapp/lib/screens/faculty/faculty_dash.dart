@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sopapp/models/project.dart';
 import 'package:sopapp/screens/faculty/add_faculty_project.dart';
+import 'package:sopapp/screens/faculty/view_details.dart';
 
 class FacultyDashboard extends StatefulWidget {
   @override
@@ -55,10 +56,14 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
                   ),
                   trailing: ElevatedButton(
                     onPressed: () {
-                      // Navigate to view application page
-                      // You can pass project details to the next screen if needed
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ViewApplicationPage(projectid: project.id,),
+                        ),
+                      );
                     },
-                    child: const Text('View Application'),
+                    child: const Text('View Details'),
                   ),
                 );
               },
