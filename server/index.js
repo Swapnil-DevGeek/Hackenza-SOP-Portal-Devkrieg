@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.post('/api/v1/signin', (req, res) => {
   const { email } = req.body;
   
-  db.get('SELECT * FROM users WHERE email = ?', [email], (err, row) => {
+  db.get('SELECT * FROM User WHERE email = ?', [email], (err, row) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: 'Internal server error' });
