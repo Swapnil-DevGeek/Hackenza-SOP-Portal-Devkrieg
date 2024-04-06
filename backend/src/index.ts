@@ -33,8 +33,5 @@ app.post('/api/v1/signin', async (c) => {
 	return c.json({ jwt });
 })
 
-
-
-
 export default app;
 
