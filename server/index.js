@@ -1,18 +1,39 @@
 // server.js
 
 const express = require('express');
-const routes = require('server/routes');
+const bodyParser = require('body-parser');
+const sqlite3 = require('sqlite3').verbose();
+const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 3000;
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+// SQLite3 database connection
+const db = new sqlite3.Database('./databasedb.sqlite3');
 
-// Use routes defined in routes.js
-app.use('/students/projects', routes);
+app.use(bodyParser.json());
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Login endpoint
+app.post('/api/v1/signin', (req, res) => {
+  const { email } = req.body;
+  
+  db.get('SELECT * FROM users WHERE email = ?', [email], (err, row) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    
+    if (!row) {
+      return res.status(401).json({ error: 'Invalid email' });
+    }
+    
+    // Generate JWT token
+    const token = jwt.sign({ userId: row.id, role : row.role }, 'your_secret_key');
+    
+    res.json({ message: 'Login successful!', token });
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
