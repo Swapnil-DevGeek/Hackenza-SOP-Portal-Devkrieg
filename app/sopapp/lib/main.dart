@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sopapp/screens/admin/admindash.dart';
+import 'package:sopapp/screens/admin/admin_dash.dart';
+import 'package:sopapp/screens/faculty/faculty_dash.dart';
 import 'package:sopapp/screens/login.dart';
-import 'package:sopapp/screens/student/studentdash.dart';
+import 'package:sopapp/screens/student/student_dash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: AdminDashboard(),
+      home: FacultyDashboard(),
     );
   }
 }

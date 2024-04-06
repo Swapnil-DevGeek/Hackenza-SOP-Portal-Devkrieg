@@ -52,11 +52,45 @@ class _AdminDashboardState extends State<AdminDashboard> {
     _searchController = TextEditingController();
   }
 
+  void _showProjectDetails(Project project) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(project.title),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Research Area: ${project.researchArea}'),
+              Text('Status: ${project.status}'),
+              Text('Start Date: ${project.startDate.toString()}'),
+              Text('End Date: ${project.endDate.toString()}'),
+              Text('Faculty: ${project.facultyId}'),
+              SizedBox(height: 20),
+              Text(project.description),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.grey[600],
       appBar: AppBar(
-        title: const Text('Project List'),
+        centerTitle: true,
+        title: const Text('Admin Dashboard'),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list),
@@ -86,6 +120,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   title: Text(_filteredProjects[index].title),
                   subtitle: Text(_filteredProjects[index].researchArea),
                   trailing: Text(_filteredProjects[index].status),
+                  onTap: () {
+                    _showProjectDetails(_filteredProjects[index]);
+                  },
                 );
               },
             ),
