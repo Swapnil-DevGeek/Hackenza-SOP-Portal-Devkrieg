@@ -11,6 +11,7 @@ class FacultyDashboard extends StatefulWidget {
 class _FacultyDashboardState extends State<FacultyDashboard> {
   List<Project> filteredProjects = List.from(projects);
   TextEditingController searchController = TextEditingController();
+  String selectedStatus = 'All';
 
   @override
   Widget build(BuildContext context) {
@@ -18,24 +19,49 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
       appBar: AppBar(
         title: const Text('Faculty Dashboard'),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: DropdownButton<String>(
+              value: selectedStatus,
+              icon: Icon(Icons.filter_alt),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.black),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedStatus = newValue!;
+                  filterProjects(selectedStatus);
+                });
+              },
+              items: <String>['All', 'Completed', 'In Progress', 'Pending']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: searchController,
               onChanged: (value) {
                 setState(() {
-                  filteredProjects = projects
-                      .where((project) =>
-                          project.title.toLowerCase().contains(value.toLowerCase()))
-                      .toList();
+                  filterProjects(selectedStatus);
                 });
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Search by title',
                 prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
               ),
             ),
           ),
@@ -44,26 +70,44 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
               itemCount: filteredProjects.length,
               itemBuilder: (context, index) {
                 final project = filteredProjects[index];
-                return ListTile(
-                  title: Text(project.title),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Project title: ${project.title}'),
-                      Text('Research Area: ${project.researchArea}'),
-                      Text('Status: ${project.status}'),
-                    ],
-                  ),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ViewApplicationPage(projectid: project.id,),
-                        ),
-                      );
-                    },
-                    child: const Text('View Details'),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: ListTile(
+                      title: Text(project.title),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 8),
+                          Text('Research Area: ${project.researchArea}'),
+                          SizedBox(height: 4),
+                          Text('Status: ${project.status}'),
+                        ],
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewApplicationPage(projectid: project.id,),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.arrow_forward_ios),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewApplicationPage(projectid: project.id),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
               },
@@ -78,9 +122,22 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
             MaterialPageRoute(builder: (context) => AddProjectPage()),
           );
         },
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
+  }
+
+  void filterProjects(String status) {
+    setState(() {
+      filteredProjects = projects.where((project) {
+        if (status == 'All') {
+          return project.title.toLowerCase().contains(searchController.text.toLowerCase());
+        } else {
+          return project.title.toLowerCase().contains(searchController.text.toLowerCase()) &&
+              project.status.toLowerCase() == status.toLowerCase();
+        }
+      }).toList();
+    });
   }
 }
 
