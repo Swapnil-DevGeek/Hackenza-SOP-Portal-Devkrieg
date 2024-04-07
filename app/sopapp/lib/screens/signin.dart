@@ -42,13 +42,16 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: () {
                     _signInWithGoogle().then((userCredential) {
+                      userCredential.user!.getIdToken().then((token) {
+                        return token;
+                      });
                       if (userCredential.user != null &&
                           userCredential.user!.email!
                               .endsWith('@goa.bits-pilani.ac.in')) {
@@ -57,7 +60,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StudentDashboard()),
+                                builder: (context) => StudentDashboard(
+                                      token: userCredential.user!
+                                          .getIdToken()
+                                          .toString(),
+                                    )),
                           );
                         } else if (userCredential.user!.email ==
                             'divyanshsingh5nov2003@gmail.com') {
@@ -78,12 +85,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       }
                     }).catchError((error) {
                       print(error);
-                      Center(
+                      const Center(
                         child: Text('Error signing in'),
                       );
                     });
                   },
-                  child: Text('Sign In with Google'),
+                  child: const Text('Sign In with Google'),
                 ),
               ],
             ),

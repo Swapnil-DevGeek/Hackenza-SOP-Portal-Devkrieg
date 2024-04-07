@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sopapp/models/project.dart';
 import 'package:sopapp/screens/student/apply.dart';
 
-// ignore: must_be_immutable
 class StudentDashboard extends StatefulWidget {
-  StudentDashboard({super.key});
+  final String token;
+  StudentDashboard({Key? key, required this.token}) : super(key: key);
 
   @override
   State<StudentDashboard> createState() => _StudentDashboardState();
@@ -36,11 +36,13 @@ class _StudentDashboardState extends State<StudentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Browse Projects',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            )),
+        title: const Text(
+          'Browse Projects',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -49,17 +51,15 @@ class _StudentDashboardState extends State<StudentDashboard> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
-
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 10.0,
-              ), // Text color
+                fontSize: 18.0,
+              ),
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: const Icon(Icons.search),
                 hintText: 'Search projects....',
                 filled: true,
-                fillColor:
-                    Colors.black.withOpacity(0.1), // Darkened background color
+                fillColor: Colors.black.withOpacity(0.1),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                   borderSide: const BorderSide(
@@ -73,53 +73,48 @@ class _StudentDashboardState extends State<StudentDashboard> {
               },
             ),
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: projects.length,
-            itemBuilder: (context, index) {
-              final project = projects[index];
-              // return ListTile(
-              //   title: Text(project.title),
-              //   subtitle: Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text('Project title: ${project.title}'),
-              //     ],
-              //   ),
-              // );
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: Icon(Icons.library_books_sharp),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black, width: 1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-
-                  title: Text(project.title,
-                      style: TextStyle(
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredProjects.length,
+              itemBuilder: (context, index) {
+                final project = filteredProjects[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: const Icon(Icons.library_books_sharp),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.black, width: 1),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    title: Text(
+                      project.title,
+                      style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                      )), // Project title in uppercase
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Research Area: ${project.researchArea}'),
-                    ],
-                  ),
-                  trailing: ElevatedButton(
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Research Area: ${project.researchArea}'),
+                      ],
+                    ),
+                    trailing: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
                       ),
-                      child: Text('Apply'),
+                      child: const Text('Apply'),
                       onPressed: () {
                         // Add code to apply for project
-                      }),
-                ),
-              );
-            },
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
+          
         ],
       ),
     );

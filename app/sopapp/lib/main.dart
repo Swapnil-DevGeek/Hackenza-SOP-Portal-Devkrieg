@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sopapp/screens/faculty/faculty_dash.dart';
 import 'package:sopapp/screens/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sopapp/screens/student/student_dash.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: StudentDashboard(),
+      home: SignInScreen(),
       //SignInScreen(),
       theme: ThemeData.light(),
     );
