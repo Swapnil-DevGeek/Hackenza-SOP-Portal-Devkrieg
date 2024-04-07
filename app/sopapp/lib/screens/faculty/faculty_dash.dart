@@ -138,7 +138,7 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddProjectPage()),
+            MaterialPageRoute(builder: (context) => ProjectInputPage()),
           );
         },
         child: Icon(Icons.add),
