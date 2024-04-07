@@ -30,6 +30,16 @@ class _SignInScreenState extends State<SignInScreen> {
     return userCredential;
   }
 
+  String gettoken()
+  {
+    _signInWithGoogle().then((userCredential) {
+      userCredential.user!.getIdToken().then((token) {
+        return token.toString();
+      });
+    });
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,9 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentDashboard(
-                                      token: userCredential.user!
-                                          .getIdToken()
-                                          .toString(),
+                                      token: gettoken(),
                                     )),
                           );
                         } else if (userCredential.user!.email ==

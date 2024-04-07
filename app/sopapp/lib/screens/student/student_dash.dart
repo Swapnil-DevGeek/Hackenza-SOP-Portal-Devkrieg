@@ -33,6 +33,13 @@ class _StudentDashboardState extends State<StudentDashboard> {
     });
   }
 
+  // void getrequest() async {
+  //   final response = await http.get(
+  //     Uri.parse('localhost:3000/api/projects/'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,22 +118,24 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       ],
                     ),
                     trailing: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text('Apply'),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ApplyNowForm(token: widget.token)),
-                        );
-                      }),
-                ),
-              );
-            },
-          ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('Apply'),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ApplyNowForm(token: widget.token)),
+                          );
+                        }),
+                  ),
+                );
+              },
+            ),
+          )
         ],
       ),
     );

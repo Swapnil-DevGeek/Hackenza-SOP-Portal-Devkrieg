@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ApplyNowPage extends StatefulWidget {
   final String token;
@@ -40,6 +41,17 @@ class _ApplyNowFormState extends State<ApplyNowForm> {
   String? _justification;
 
   final List<String> _programOfStudyOptions = ['First Degree', 'PhD'];
+
+  void getrequest() async {
+    final response = http.get(
+      Uri.parse('localhost:3000/api/v1/student/project'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': widget.token,
+      },
+    );
+    print(response.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +142,7 @@ class _ApplyNowFormState extends State<ApplyNowForm> {
                 const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
+                    getrequest();
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       // Submit form data here
