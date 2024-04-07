@@ -17,7 +17,7 @@ Welcome to the repository of the Devkrieg Team's SOP Portal project! This projec
 
 The Devkrieg SOP Portal is designed to digitize the current manual and offline SOP/DOP/SAT project proposal and student enrollment process. By creating a web-based management system, we aim to enhance the accessibility of project advertisements and streamline the application process, benefiting both students and faculty members.
 
--The backend has been hosted at [link](http://172.208.48.24:3000/api/v1)
+-The backend has been hosted at [link](http://172.208.48.24:3000/)
 
 ## Objectives
 
