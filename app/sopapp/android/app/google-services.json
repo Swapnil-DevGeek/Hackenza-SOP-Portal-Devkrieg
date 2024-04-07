@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "615351642956",
+    "project_id": "hackenza-e2886",
+    "storage_bucket": "hackenza-e2886.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615351642956:android:ebbf9031636f888efabde9",
+        "android_client_info": {
+          "package_name": "com.example.sopapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615351642956-25t1cjof3dn0rbuuodeq2jnt5rj110t5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNfl-ZOv2LLyulNIT4cAunsXBQpyVG0ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615351642956-25t1cjof3dn0rbuuodeq2jnt5rj110t5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615351642956-dajn23t26phmqsaiv00dkj2h722nslrb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sopapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615351642956:android:c6ce4641a60432f6fabde9",
+        "android_client_info": {
+          "package_name": "com.hackenza.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615351642956-k04bucitd20fgpffpohlbhspqotf8h9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hackenza.app",
+            "certificate_hash": "1a1fbcfda958d383d1a45397210c11573a2e22f4"
+          }
+        },
+        {
+          "client_id": "615351642956-25t1cjof3dn0rbuuodeq2jnt5rj110t5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNfl-ZOv2LLyulNIT4cAunsXBQpyVG0ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615351642956-25t1cjof3dn0rbuuodeq2jnt5rj110t5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615351642956-dajn23t26phmqsaiv00dkj2h722nslrb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sopapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

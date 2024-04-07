@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyArGGTetCYZ9hIZyWTyIGzZKi6p9pnrgCY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>615351642956</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.sopapp.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>hackenza-e2886</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hackenza-e2886.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:615351642956:ios:51d556ae2ded2966fabde9</string>
+</dict>
+</plist>

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sopapp/models/project.dart';
 import 'package:sopapp/screens/student/apply.dart';
 
+// ignore: must_be_immutable
 class StudentDashboard extends StatefulWidget {
+  StudentDashboard({super.key});
+
   @override
-  _StudentDashboardState createState() => _StudentDashboardState();
+  State<StudentDashboard> createState() => _StudentDashboardState();
 }
 
 class _StudentDashboardState extends State<StudentDashboard> {
@@ -33,25 +36,36 @@ class _StudentDashboardState extends State<StudentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Dashboard'),
-        centerTitle: true,
-        actions: [
-          // Removed the search button
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight + 20),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
+        title: Text('Browse Projects',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            )),
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
-              style: TextStyle(color: Colors.white), // Text color
+
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 10.0,
+              ), // Text color
               decoration: InputDecoration(
-                hintText: "Search by title, area, or status",
+                suffixIcon: Icon(Icons.search),
+                hintText: 'Search projects....',
                 filled: true,
                 fillColor:
                     Colors.black.withOpacity(0.1), // Darkened background color
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 3,
+                  ),
                 ),
               ),
               onChanged: (value) {
@@ -59,58 +73,54 @@ class _StudentDashboardState extends State<StudentDashboard> {
               },
             ),
           ),
-        ),
-      ),
-      body: ListView.builder(
-        itemCount: filteredProjects.length,
-        itemBuilder: (context, index) {
-          final project = filteredProjects[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 4,
-              child: ListTile(
-                title: Text(
-                  project.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: projects.length,
+            itemBuilder: (context, index) {
+              final project = projects[index];
+              // return ListTile(
+              //   title: Text(project.title),
+              //   subtitle: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text('Project title: ${project.title}'),
+              //     ],
+              //   ),
+              // );
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: Icon(Icons.library_books_sharp),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.black, width: 1),
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 8),
-                    Text(
-                      'Research Area: ${project.researchArea}',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Status: ${project.status}',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ApplyNowForm(),
+
+                  title: Text(project.title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      )), // Project title in uppercase
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Research Area: ${project.researchArea}'),
+                    ],
+                  ),
+                  trailing: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.deepOrange.shade900, // Text color
-                  ),
-                  child: Text('Apply'),
+                      child: Text('Apply'),
+                      onPressed: () {
+                        // Add code to apply for project
+                      }),
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ],
       ),
     );
   }
