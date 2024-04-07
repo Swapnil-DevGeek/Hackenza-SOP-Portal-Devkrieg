@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sopapp/models/application.dart';
 import 'package:sopapp/screens/admin/admin_dash.dart';
 import 'package:sopapp/screens/faculty/faculty_dash.dart';
 import 'package:sopapp/screens/login.dart';
+import 'package:sopapp/screens/student/my_applications.dart';
 import 'package:sopapp/screens/student/student_dash.dart';
 
 void main() {
