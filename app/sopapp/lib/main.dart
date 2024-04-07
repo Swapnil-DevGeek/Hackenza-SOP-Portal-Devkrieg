@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sopapp/screens/faculty/faculty_dash.dart';
 import 'package:sopapp/screens/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sopapp/screens/student/myapplications.dart';
 import 'package:sopapp/screens/student/student_dash.dart';
 import 'firebase_options.dart';
 // import 'package:sopapp/screens/admin/admin_dash.dart';
@@ -23,7 +24,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: SignInScreen(),
-      //SignInScreen(),
       theme: ThemeData.light(),
     );
   }
