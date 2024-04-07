@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sopapp/screens/faculty/faculty_dash.dart';
 import 'package:sopapp/screens/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sopapp/screens/student/myapplications.dart';

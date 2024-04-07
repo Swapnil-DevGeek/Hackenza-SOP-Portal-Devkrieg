@@ -17,15 +17,19 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Faculty Dashboard'),
+        title: const Text('Faculty Dashboard',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 30
+        ),),
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0,),
             child: DropdownButton<String>(
               value: selectedStatus,
               icon: Icon(Icons.filter_alt),
-              iconSize: 24,
+              iconSize: 30,
               elevation: 16,
               style: TextStyle(color: Colors.black),
               onChanged: (String? newValue) {
@@ -56,11 +60,21 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
                   filterProjects(selectedStatus);
                 });
               },
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+              ),
               decoration: InputDecoration(
-                labelText: 'Search by title',
-                prefixIcon: Icon(Icons.search),
+                suffixIcon: const Icon(Icons.search),
+                hintText: 'Search projects....',
+                filled: true,
+                fillColor: Colors.black.withOpacity(0.1),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 3,
+                  ),
                 ),
               ),
             ),
@@ -71,43 +85,48 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
               itemBuilder: (context, index) {
                 final project = filteredProjects[index];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Card(
-                    elevation: 4,
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: const Icon(Icons.library_books_sharp),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+                      side: const BorderSide(color: Colors.black, width: 1),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    child: ListTile(
-                      title: Text(project.title),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 8),
-                          Text('Research Area: ${project.researchArea}'),
-                          SizedBox(height: 4),
-                          Text('Status: ${project.status}'),
-                        ],
+                    title: Text(
+                      project.title,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ViewApplicationPage(projectid: project.id,),
-                            ),
-                          );
-                        },
-                        icon: Icon(Icons.arrow_forward_ios),
-                      ),
-                      onTap: () {
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Research Area: ${project.researchArea}'),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ViewApplicationPage(projectid: project.id),
+                            builder: (context) => ViewApplicationPage(
+                              projectid: project.id,
+                            ),
                           ),
                         );
                       },
+                      icon: Icon(Icons.arrow_forward_ios),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ViewApplicationPage(projectid: project.id),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
@@ -131,9 +150,13 @@ class _FacultyDashboardState extends State<FacultyDashboard> {
     setState(() {
       filteredProjects = projects.where((project) {
         if (status == 'All') {
-          return project.title.toLowerCase().contains(searchController.text.toLowerCase());
+          return project.title
+              .toLowerCase()
+              .contains(searchController.text.toLowerCase());
         } else {
-          return project.title.toLowerCase().contains(searchController.text.toLowerCase()) &&
+          return project.title
+                  .toLowerCase()
+                  .contains(searchController.text.toLowerCase()) &&
               project.status.toLowerCase() == status.toLowerCase();
         }
       }).toList();

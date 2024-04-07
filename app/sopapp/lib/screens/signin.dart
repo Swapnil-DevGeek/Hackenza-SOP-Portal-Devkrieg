@@ -30,6 +30,16 @@ class _SignInScreenState extends State<SignInScreen> {
     return userCredential;
   }
 
+  String gettoken()
+  {
+    _signInWithGoogle().then((userCredential) {
+      userCredential.user!.getIdToken().then((token) {
+        return token.toString();
+      });
+    });
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +52,16 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/images/bits.png',
+                  width: 200, // Adjust the width as desired
+                  height: 200, // Adjust the height as desired
+                ),
+                SizedBox(height:20),
                 ElevatedButton(
                   onPressed: () {
                     _signInWithGoogle().then((userCredential) {
@@ -61,9 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => StudentDashboard(
-                                      token: userCredential.user!
-                                          .getIdToken()
-                                          .toString(),
+                                      token: gettoken(),
                                     )),
                           );
                         } else if (userCredential.user!.email ==
@@ -85,12 +99,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       }
                     }).catchError((error) {
                       print(error);
-                      Center(
+                      const Center(
                         child: Text('Error signing in'),
                       );
                     });
                   },
-                  child: Text('Sign In with Google'),
+                  child: const Text('Sign In with Google'),
                 ),
               ],
             ),

@@ -3,7 +3,6 @@ import 'package:sopapp/models/project.dart';
 import 'package:sopapp/screens/student/apply.dart';
 import 'package:sopapp/screens/student/myapplications.dart';
 
-// ignore: must_be_immutable
 class StudentDashboard extends StatefulWidget {
   final String token;
   StudentDashboard({super.key, required this.token});
@@ -34,15 +33,25 @@ class _StudentDashboardState extends State<StudentDashboard> {
     });
   }
 
+  // void getrequest() async {
+  //   final response = await http.get(
+  //     Uri.parse('localhost:3000/api/projects/'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Browse Projects',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            )),
+        centerTitle: true,
+        title: const Text(
+          'Department of CSIS',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         automaticallyImplyLeading: false,
       ),
       floatingActionButton: FloatingActionButton(
@@ -61,17 +70,15 @@ class _StudentDashboardState extends State<StudentDashboard> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
-
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 10.0,
-              ), // Text color
+                fontSize: 18.0,
+              ),
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: const Icon(Icons.search),
                 hintText: 'Search projects....',
                 filled: true,
-                fillColor:
-                    Colors.black.withOpacity(0.1), // Darkened background color
+                fillColor: Colors.black.withOpacity(0.1),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                   borderSide: const BorderSide(
@@ -85,57 +92,51 @@ class _StudentDashboardState extends State<StudentDashboard> {
               },
             ),
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: projects.length,
-            itemBuilder: (context, index) {
-              final project = projects[index];
-              // return ListTile(
-              //   title: Text(project.title),
-              //   subtitle: Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text('Project title: ${project.title}'),
-              //     ],
-              //   ),
-              // );
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: Icon(Icons.library_books_sharp),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black, width: 1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-
-                  title: Text(project.title,
-                      style: TextStyle(
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredProjects.length,
+              itemBuilder: (context, index) {
+                final project = filteredProjects[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: const Icon(Icons.library_books_sharp),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.black, width: 1),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    title: Text(
+                      project.title,
+                      style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                      )), // Project title in uppercase
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Research Area: ${project.researchArea}'),
-                    ],
-                  ),
-                  trailing: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
                       ),
-                      child: Text('Apply'),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ApplyNowForm(token: widget.token)),
-                        );
-                      }),
-                ),
-              );
-            },
-          ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Research Area: ${project.researchArea}'),
+                      ],
+                    ),
+                    trailing: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('Apply'),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ApplyNowForm(token: widget.token)),
+                          );
+                        }),
+                  ),
+                );
+              },
+            ),
+          )
         ],
       ),
     );

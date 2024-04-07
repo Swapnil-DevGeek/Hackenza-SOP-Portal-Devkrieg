@@ -51,7 +51,7 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Applications'),
+        title: const Text('View Applications'),
         actions: [
           IconButton(
             onPressed: () {
@@ -59,10 +59,10 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text("Search"),
+                    title: const Text("Search"),
                     content: TextField(
                       controller: searchController,
-                      decoration: InputDecoration(hintText: "Search by name"),
+                      decoration: const InputDecoration(hintText: "Search by name"),
                       onChanged: (value) {
                         searchApplications(value);
                       },
@@ -71,7 +71,7 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
                 },
               );
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           ),
           IconButton(
             onPressed: () {
@@ -79,7 +79,7 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
                 sortApplications();
               });
             },
-            icon: Icon(Icons.sort),
+            icon: const Icon(Icons.sort),
           ),
         ],
       ),
@@ -89,7 +89,7 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
           final studentApplication = studentApplications[index];
           return Card(
             elevation: 4,
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: ListTile(
               title: Text(studentApplication.studentName),
               subtitle: Column(
@@ -113,12 +113,12 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green, // Background color
                     ),
-                    child: Text(
+                    child: const Text(
                       'Accept',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
                       // Logic to reject the application
@@ -129,7 +129,7 @@ class _ViewApplicationPageState extends State<ViewApplicationPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red, // Background color
                     ),
-                    child: Text(
+                    child: const Text(
                       'Reject',
                       style: TextStyle(color: Colors.white),
                     ),
