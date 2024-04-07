@@ -13,7 +13,6 @@ class StudentDashboard extends StatefulWidget {
 }
 
 class _StudentDashboardState extends State<StudentDashboard> {
-
   late List<Project> filteredProjects;
   TextEditingController searchController = TextEditingController();
 
@@ -127,7 +126,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       ),
                       child: Text('Apply'),
                       onPressed: () {
-                        // Add code to apply for project
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ApplyNowForm(token: widget.token)),
+                        );
                       }),
                 ),
               );
