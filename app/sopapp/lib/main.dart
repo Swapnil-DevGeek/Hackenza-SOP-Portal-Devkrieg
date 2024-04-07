@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: StudentDashboard(),
-      //ApplicationsPage(),
-      //SignInScreen(),
+      home: SignInScreen(),
       theme: ThemeData.light(),
     );
   }

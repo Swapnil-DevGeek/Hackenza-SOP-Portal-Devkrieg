@@ -5,13 +5,15 @@ import 'package:sopapp/screens/student/myapplications.dart';
 
 // ignore: must_be_immutable
 class StudentDashboard extends StatefulWidget {
-  StudentDashboard({super.key});
+  final String token;
+  StudentDashboard({super.key, required this.token});
 
   @override
   State<StudentDashboard> createState() => _StudentDashboardState();
 }
 
 class _StudentDashboardState extends State<StudentDashboard> {
+
   late List<Project> filteredProjects;
   TextEditingController searchController = TextEditingController();
 
