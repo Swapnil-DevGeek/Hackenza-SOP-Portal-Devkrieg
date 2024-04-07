@@ -56,6 +56,12 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/images/bits.png',
+                  width: 200, // Adjust the width as desired
+                  height: 200, // Adjust the height as desired
+                ),
+                SizedBox(height:20),
                 ElevatedButton(
                   onPressed: () {
                     _signInWithGoogle().then((userCredential) {

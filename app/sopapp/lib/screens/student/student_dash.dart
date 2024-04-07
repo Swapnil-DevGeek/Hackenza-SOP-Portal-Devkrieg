@@ -44,8 +44,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
-          'Browse Projects',
+          'Department of CSIS',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
