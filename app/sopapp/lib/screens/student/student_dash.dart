@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sopapp/models/project.dart';
+import 'package:sopapp/screens/student/apply.dart';
 import 'package:sopapp/screens/student/myapplications.dart';
 
 // ignore: must_be_immutable
