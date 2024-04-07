@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sopapp/models/project.dart';
 import 'package:sopapp/screens/student/apply.dart';
+import 'package:sopapp/screens/student/myapplications.dart';
 
 // ignore: must_be_immutable
 class StudentDashboard extends StatefulWidget {
-  StudentDashboard({super.key});
+  final String token;
+  StudentDashboard({super.key, required this.token});
 
   @override
   State<StudentDashboard> createState() => _StudentDashboardState();
@@ -42,6 +44,16 @@ class _StudentDashboardState extends State<StudentDashboard> {
               fontWeight: FontWeight.bold,
             )),
         automaticallyImplyLeading: false,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ApplicationsPage()),
+          );
+        },
+        child: Icon(Icons.assignment),
+        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [
@@ -114,7 +126,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       ),
                       child: Text('Apply'),
                       onPressed: () {
-                        // Add code to apply for project
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ApplyNowForm(token: widget.token)),
+                        );
                       }),
                 ),
               );

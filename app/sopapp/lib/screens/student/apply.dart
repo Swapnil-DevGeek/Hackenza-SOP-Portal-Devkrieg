@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ApplyNowPage extends StatelessWidget {
+class ApplyNowPage extends StatefulWidget {
+  final String token;
+  ApplyNowPage({super.key, required this.token});
+  @override
+  State<ApplyNowPage> createState() => _ApplyNowPageState();
+}
+
+class _ApplyNowPageState extends State<ApplyNowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,13 +16,17 @@ class ApplyNowPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ApplyNowForm(),
+        child: ApplyNowForm(
+          token: widget.token,
+        ),
       ),
     );
   }
 }
 
 class ApplyNowForm extends StatefulWidget {
+  final String token;
+  ApplyNowForm({super.key, required this.token});
   @override
   _ApplyNowFormState createState() => _ApplyNowFormState();
 }
@@ -81,7 +92,8 @@ class _ApplyNowFormState extends State<ApplyNowForm> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField(
-                  decoration: const InputDecoration(labelText: 'Program of Study'),
+                  decoration:
+                      const InputDecoration(labelText: 'Program of Study'),
                   value: _programOfStudy,
                   items: _programOfStudyOptions.map((program) {
                     return DropdownMenuItem(

@@ -49,6 +49,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 ElevatedButton(
                   onPressed: () {
                     _signInWithGoogle().then((userCredential) {
+                      userCredential.user!.getIdToken().then((token) {
+                        return token;
+                      });
                       if (userCredential.user != null &&
                           userCredential.user!.email!
                               .endsWith('@goa.bits-pilani.ac.in')) {
@@ -57,7 +60,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StudentDashboard()),
+                                builder: (context) => StudentDashboard(
+                                      token: userCredential.user!
+                                          .getIdToken()
+                                          .toString(),
+                                    )),
                           );
                         } else if (userCredential.user!.email ==
                             'divyanshsingh5nov2003@gmail.com') {
