@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sopapp/models/project.dart';
+import 'package:sopapp/screens/student/myapplications.dart';
 
 // ignore: must_be_immutable
 class StudentDashboard extends StatefulWidget {
@@ -41,6 +42,16 @@ class _StudentDashboardState extends State<StudentDashboard> {
               fontWeight: FontWeight.bold,
             )),
         automaticallyImplyLeading: false,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ApplicationsPage()),
+          );
+        },
+        child: Icon(Icons.assignment),
+        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [
