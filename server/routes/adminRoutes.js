@@ -37,5 +37,35 @@ router.get('/',(req,res)=>{
     });
   });
   
+router.delete('/project/:id',(req,res)=>{
+    const header = req.headers.authorization;
+    if(!header){
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+    
+    const token = header;
+    jwt.verify(token, 'your_secret_key', (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      } else {
+        console.log(decoded);
+        const {userId} = decoded;
+  
+        const sql = `DELETE FROM sop_dop_sat_projects WHERE project_id = ?`;
+  
+        // Execute the query
+        db.run(sql, [req.params.id], (err) => {
+          if (err) {
+            console.error(err.message);
+            res.status(500).send('Internal Server Error');
+          } else {
+            res.json({ message: 'Project deleted successfully' });
+          }
+        });
+      }
+    });
+})
+
+
 
 module.exports = router;
